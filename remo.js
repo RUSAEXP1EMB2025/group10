@@ -1,5 +1,6 @@
 function getNatureRemoData(endpoint) {
-  const REMO_ACCESS_TOKEN = PropertiesService.getScriptProperties().getProperty('REMO_ACCESS_TOKEN');
+  const REMO_ACCESS_TOKEN = PropertiesService.getScriptProperties().getProperty("REMO_ACCESS_TOKEN");
+    
   const headers = {
     "Content-Type": "application/json;",
     'Authorization': 'Bearer ' + REMO_ACCESS_TOKEN,
