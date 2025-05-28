@@ -1,3 +1,3 @@
-- GitHubとApps Scriptは連携済  
-- アクセストークン,スプレッドシートIDはスクリプトプロパティにて管理  
-- エディタで編集,GitHubで管理、Apps Scriptで実行  
+- GitHubとGASはGoogle Apps Script GitHub アシスタントによって連携
+- コードはエディタで編集し、GitHub でバージョン管理  
+- 実行は Apps Script 上で行う  
