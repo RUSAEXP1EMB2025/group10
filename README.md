@@ -1,1 +1,3 @@
+GitHubとApps Scriptは連携済
 アクセストークン,スプレッドシートIDはスクリプトプロパティにて管理
+エディタで編集,GitHubで管理、Apps Scriptで実行
