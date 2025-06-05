@@ -3,13 +3,13 @@ function doPost(e) {
     const replyToken = data.events[0].replyToken;
     const userMessage = data.events[0].message.text;
 
-    Logger.log("ユーザーのメッセージ: " + userMessage);
-
     let replyMessage;
 
     if (userMessage === "on") {
+        LightSet();
         replyMessage = "ライトをつけました";
     } else if (userMessage === "off") {
+        LightSet();
         replyMessage = "ライトを消しました";
     } else {
         replyMessage = "無効なテキストです";
