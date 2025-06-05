@@ -1,7 +1,3 @@
-const LINE_ACCESS_TOKEN = PropertiesService.getScriptProperties().getProperty("LINE_ACCESS_TOKEN");
-
-const LINE_MESSAGE_ENDPOINT = 'https://api.line.me/v2/bot/message/broadcast';
-
 function LineMessage(message) {
     const header = {
         'Content-Type': 'application/json',
@@ -23,9 +19,10 @@ function LineMessage(message) {
         'payload': JSON.stringify(payload)
     };
 
-    UrlFetchApp.fetch(LINE_MESSAGE_ENDPOINT, options);
+    UrlFetchApp.fetch(LINE_BROADCAST_ENDPOINT, options);
 }
 
+//テスト用のmain
 function main() {
     const message = "こんにちは";
     LineMessage(message);
