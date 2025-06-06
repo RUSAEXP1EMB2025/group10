@@ -24,6 +24,12 @@ const LIGHT_ON_ID = PropertiesService.getScriptProperties().getProperty("LIGHT_O
 // 今月の目標電気代.設定されていなかったら「0」という文字列が入る.
 const INPUT_ENERGY_COST = PropertiesService.getScriptProperties().getProperty("INPUT_ENERGY_COST") || "0";
 
+//zaimのAPIのユーザーID
+const CONSUMER_ID = PropertiesService.getScriptProperties().getProperty("CONSUMER_ID");
+
+//zaimのAPIのパスワード
+const CONSUMER_SECRET = PropertiesService.getScriptProperties().getProperty("CONSUMER_SECRET");
+
 // LINE Bot：全ユーザーにメッセージをブロードキャストするエンドポイント
 const LINE_BROADCAST_ENDPOINT = 'https://api.line.me/v2/bot/message/broadcast';
 
