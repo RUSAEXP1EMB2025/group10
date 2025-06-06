@@ -1,10 +1,17 @@
-//これを実行するとRemoに登録している家具の情報を取得できる
-function GetDeviceId() {
-    var url = REMO_ENDPOINT;
-    var options = {
-        "method": "get",
-        "headers": { "Authorization": "Bearer " + REMO_ACCESS_TOKEN }
+// Remoに登録されている家電（appliances）の情報を取得し、整形してログ出力する
+function logRemoAppliances() {
+    const url = REMO_ENDPOINT;
+    const options = {
+        method: "get",
+        headers: {
+            Authorization: "Bearer " + REMO_ACCESS_TOKEN
+        }
     };
-    var reply = UrlFetchApp.fetch(url, options);
-    Logger.log(reply.getContentText());
+
+    const response = UrlFetchApp.fetch(url, options);
+    const jsonText = response.getContentText();
+    const jsonData = JSON.parse(jsonText);
+
+    // 整形してログ出力
+    Logger.log(JSON.stringify(jsonData, null, 2));
 }
