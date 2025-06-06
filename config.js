@@ -21,7 +21,7 @@ const APPLIANCE_ID = PropertiesService.getScriptProperties().getProperty("APPLIA
 // ライトON用の赤外線信号ID
 const LIGHT_ON_ID = PropertiesService.getScriptProperties().getProperty("LIGHT_ON_ID");
 
-// 今月の目標電気代.設定されていなかったら「未設定」という文字が入る.
+// 今月の目標電気代.設定されていなかったら「0」という文字列が入る.
 const INPUT_ENERGY_COST = PropertiesService.getScriptProperties().getProperty("INPUT_ENERGY_COST") || "0";
 
 // LINE Bot：全ユーザーにメッセージをブロードキャストするエンドポイント
