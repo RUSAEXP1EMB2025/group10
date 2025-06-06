@@ -22,7 +22,7 @@ const APPLIANCE_ID = PropertiesService.getScriptProperties().getProperty("APPLIA
 const LIGHT_ON_ID = PropertiesService.getScriptProperties().getProperty("LIGHT_ON_ID");
 
 // 今月の目標電気代.設定されていなかったら「未設定」という文字が入る.
-const INPUT_ENERGY_COST = PropertiesService.getScriptProperties().getProperty("INPUT_ENERGY_COST") || "未設定";
+const INPUT_ENERGY_COST = PropertiesService.getScriptProperties().getProperty("INPUT_ENERGY_COST") || "0";
 
 // LINE Bot：全ユーザーにメッセージをブロードキャストするエンドポイント
 const LINE_BROADCAST_ENDPOINT = 'https://api.line.me/v2/bot/message/broadcast';

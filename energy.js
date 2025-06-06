@@ -19,5 +19,5 @@ function calc_energy() {
 
 //目標電気代を聞く.月1でトリガー設定する.
 function HowMuchCost() {
-    SendLineMessage("今月の目標電気代を数字のみで入力してください.変更は出来ません.");
+    SendLineMessage("今月の目標電気代を半角数字のみで入力してください。変更は出来ません。");
 }
