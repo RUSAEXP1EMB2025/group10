@@ -1,3 +1,4 @@
+//これを実行するとRemoに登録している家具の情報を取得できる
 function GetDeviceId() {
     var url = REMO_ENDPOINT;
     var options = {

@@ -1,9 +1,11 @@
 function LightSet() {
-    const url = `https://api.nature.global/1/signals/${LIGHT_ON_ID}/send`;
+    const url = `https://api.nature.global/1/signals/${LIGHT_ON_ID}/send`;  //APIの送信先のurl(ライトオン)
+
+    //UrlFetchApp.fetch()に渡す設定
     const options = {
-        method: "post",
+        method: "post", //POSTメソッド使用
         headers: {
-            Authorization: "Bearer " + REMO_ACCESS_TOKEN
+            Authorization: "Bearer " + REMO_ACCESS_TOKEN    //LINEサーバへの認証情報
         }
     };
 
