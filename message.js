@@ -34,7 +34,7 @@ function SendLineMessage(message) {
 }
 
 //返信する関数
-function ReplyLineMessage(replyMessage) {
+function ReplyLineMessage(replyToken, replyMessage) {
 
     //ヘッダーを定義
     const headers = {
