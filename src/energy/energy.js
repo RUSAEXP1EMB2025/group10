@@ -7,6 +7,8 @@ function calc_energy() {
         1.ライトをオフしたらその時点での電気代を計算
         2.月初に入力した設定金額(引数のinput_energy_cost)を超えていないなら0を返す
         3.input_energy_costを超えたら1を返す
+
+        hano
     */
 
 
