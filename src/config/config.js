@@ -41,6 +41,7 @@ const CONSUMER_SECRET = PropertiesService.getScriptProperties().getProperty("CON
 
 //オフする度にこのGENZAI_DENKIDAIに加算していく
 const GENZAI_DENKIDAI = PropertiesService.getScriptProperties().getProperty("GENZAI_DENKIDAI") || "0";
+
 // weather API key
 const WEATHER_API_KEY = PropertiesService.getScriptProperties().getProperty("WEATHER_API_KEY");
 

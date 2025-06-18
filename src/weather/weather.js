@@ -5,8 +5,6 @@
 //状態を格納をする変数をLIGHT_STATE(1,0)1:ついてる
 
 //light_state() === 1
-
-const API_KEY = '22d436fa3881ab36031b7afafcc7dfb0';
 const SHEET_NAME = '天気';
 
 // 取得する場所の緯度と経度（大阪府茨木市）
@@ -16,7 +14,7 @@ const LONGITUDE = '135.5710'; // 経度
 function recordTodaysWeather() {
     try {
         // OpenWeatherMap APIのURLを構築
-        const url = `https://api.openweathermap.org/data/2.5/weather?lat=${LATITUDE}&lon=${LONGITUDE}&appid=${API_KEY}&units=metric&lang=ja`;
+        const url = `https://api.openweathermap.org/data/2.5/weather?lat=${LATITUDE}&lon=${LONGITUDE}&appid=${WEATHER_API_KEY}&units=metric&lang=ja`;
 
         // APIにリクエストを送信してレスポンスを取得
         const response = UrlFetchApp.fetch(url);
