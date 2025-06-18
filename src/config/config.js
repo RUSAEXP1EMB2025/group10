@@ -22,7 +22,7 @@ const APPLIANCE_ID = PropertiesService.getScriptProperties().getProperty("APPLIA
 const LIGHT_ON_ID = PropertiesService.getScriptProperties().getProperty("LIGHT_ON_ID");
 
 // ライトOFF用の赤外線信号ID
-LIGHT_OFF_ID = PropertiesService.getScriptProperties().getProperty("LIGHT_OFF_ID");
+const LIGHT_OFF_ID = PropertiesService.getScriptProperties().getProperty("LIGHT_OFF_ID");
 
 // 今月の目標電気代.設定されていなかったら「0」という文字列が入る.
 const INPUT_ENERGY_COST = PropertiesService.getScriptProperties().getProperty("INPUT_ENERGY_COST") || "0";
