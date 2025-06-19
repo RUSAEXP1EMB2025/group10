@@ -17,6 +17,18 @@ function doPost(e) {    //引数eはdoPost関数に自動で渡されるHTTPリ�
                 break;
             }
 
+            // 目標電気代を超えているとき
+            if (FORCEOFF_ENERGY === "1") {
+                replyMessage = "今月はすでに目標電気代を超えているので照明をつけることができません。どうしてもつけたい場合は目標電気代を変更してください。"
+                break;
+            }
+
+            // 目標支出額を超えているとき
+            if (FORCEOFF_EXPENSE === "1") {
+                replyMessage = "今月はすでに目標支出額を超えているので照明をつけることができません。どうしてもつけたい場合は目標支出額を変更してください。"
+                break;
+            }
+
             setSensorData("オン");  //シートに書き込み
             LightOn();            //ライトをつける
             replyMessage = "ライトをつけました。";
@@ -57,11 +69,23 @@ function doPost(e) {    //引数eはdoPost関数に自動で渡されるHTTPリ�
         case (/^\d+$/.test(userMessage)) && (WHICHSTATE === "0"):  //半角数字かつ電気代設定
             PropertiesService.getScriptProperties().setProperty("INPUT_ENERGY_COST", userMessage);
             replyMessage = `今月の目標電気代を ${userMessage} 円に設定しました。`;
+
+            if (FORCEOFF_ENERGY === "1") {
+                //計算し直し
+                break;
+            }
+
             break;
 
         case (/^\d+$/.test(userMessage)) && (WHICHSTATE === "1"):  //半角数字かつ支出額設定
             PropertiesService.getScriptProperties().setProperty("INPUT_EXPENSE", userMessage);
             replyMessage = `今月の目標支出額を ${userMessage} 円に設定しました。`;
+
+            if (FORCEOFF_EXPENSE === "1") {
+                //計算し直し
+                break;
+            }
+
             break;
 
         default:

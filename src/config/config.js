@@ -27,8 +27,14 @@ const LIGHT_OFF_ID = PropertiesService.getScriptProperties().getProperty("LIGHT_
 // 今月の目標電気代.設定されていなかったら「0」という文字列が入る.
 const INPUT_ENERGY_COST = PropertiesService.getScriptProperties().getProperty("INPUT_ENERGY_COST") || "0";
 
+// オフする度にこのGENZAI_DENKIDAIに加算していく
+const GENZAI_DENKIDAI = PropertiesService.getScriptProperties().getProperty("GENZAI_DENKIDAI") || "0";
+
 // 今月の目標支出額.設定されていなかったら「0」という文字列が入る.
 const INPUT_EXPENSE = PropertiesService.getScriptProperties().getProperty("INPUT_EXPENSE") || "0";
+
+// 一日の初めに前日の支出額をここに格納していく
+const EXPENSE = PropertiesService.getScriptProperties().getProperty("EXPENSE") || "0";
 
 // ユーザが電気代設定と支出額設定のどちらを選んだか.設定されていなかったら「0」という文字列が入る.（0：電気代設定, 1：支出額設定）
 const WHICHSTATE = PropertiesService.getScriptProperties().getProperty("WHICHSTATE") || "0";
@@ -39,11 +45,14 @@ const CONSUMER_ID = PropertiesService.getScriptProperties().getProperty("CONSUME
 // zaimのAPIのパスワード
 const CONSUMER_SECRET = PropertiesService.getScriptProperties().getProperty("CONSUMER_SECRET");
 
-//オフする度にこのGENZAI_DENKIDAIに加算していく
-const GENZAI_DENKIDAI = PropertiesService.getScriptProperties().getProperty("GENZAI_DENKIDAI") || "0";
-
 // weather API key
 const WEATHER_API_KEY = PropertiesService.getScriptProperties().getProperty("WEATHER_API_KEY");
+
+// 目標電気代を超えたらこれを1にする.1の時はオン出来ないようにする.
+const FORCEOFF_ENERGY = PropertiesService.getScriptProperties().getProperty("FORCEOFF_ENERGY") || "0";
+
+// 目標支出額を超えたらこれを1にする.1の時はオン出来ないようにする.
+const FORCEOFF_EXPENSE = PropertiesService.getScriptProperties().getProperty("FORCEOFF_EXPENSE") || "0";
 
 // LINE Bot：全ユーザーにメッセージをブロードキャストするエンドポイント
 const LINE_BROADCAST_ENDPOINT = 'https://api.line.me/v2/bot/message/broadcast';
@@ -53,3 +62,6 @@ const LINE_REPLY_ENDPOINT = 'https://api.line.me/v2/bot/message/reply';
 
 // Nature Remoの家電一覧を取得するAPIエンドポイント
 const REMO_ENDPOINT = 'https://api.nature.global/1/appliances';
+
+//zaimのエンドポイント
+const ZAIM_ENDPOINT = 'https://api.zaim.net/v2/home/money';
