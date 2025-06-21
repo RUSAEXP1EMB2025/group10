@@ -40,7 +40,7 @@ const EXPENSE = PropertiesService.getScriptProperties().getProperty("EXPENSE") |
 const WHICHSTATE = PropertiesService.getScriptProperties().getProperty("WHICHSTATE") || "0";
 
 // zaimのAPIのユーザーID
-const CONSUMER_ID = PropertiesService.getScriptProperties().getProperty("CONSUMER_ID");
+const CONSUMER_KEY = PropertiesService.getScriptProperties().getProperty("CONSUMER_KEY");
 
 // zaimのAPIのパスワード
 const CONSUMER_SECRET = PropertiesService.getScriptProperties().getProperty("CONSUMER_SECRET");
