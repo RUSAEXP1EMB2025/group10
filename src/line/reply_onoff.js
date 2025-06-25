@@ -12,10 +12,10 @@ function doPost(e) {    //引数eはdoPost関数に自動で渡されるHTTPリ�
         case userMessage === "on":
 
             //既に点灯しているとき
-            if (LightState() === "on") {
+            /* if (LightState() === "on") {
                 replyMessage = "既に点灯しています。";
                 break;
-            }
+            } */
 
             // 目標電気代を超えているとき
             if ((FORCEOFF_ENERGY === "1") && (FORCEOFF_EXPENSE !== "1")) {
@@ -43,10 +43,10 @@ function doPost(e) {    //引数eはdoPost関数に自動で渡されるHTTPリ�
         case userMessage === "off":
 
             //既に点灯しているとき
-            if (LightState() === "off") {
+            /* if (LightState() === "off") {
                 replyMessage = "既に消灯しています。";
                 break;
-            }
+            } */
 
             setSensorData("オフ");  //シートに書き込み
             LightOff();            //ライトを消す
@@ -76,11 +76,11 @@ function doPost(e) {    //引数eはdoPost関数に自動で渡されるHTTPリ�
             PropertiesService.getScriptProperties().setProperty("INPUT_ENERGY_COST", userMessage);
             replyMessage = `今月の目標電気代を ${userMessage} 円に設定しました。`;
 
-            // ここで設定し直した電気代と今までの電気代を比較し直す(操作がストップしている場合)
+            // ここで設定し直した電気代と今までの電気代を比較し直す
             if (FORCEOFF_ENERGY === "1") {
-
+                // 操作がストップしている場合
                 const energy = parseInt(GENZAI_DENKIDAI, 10);
-                const in_energy = parseInt(INPUT_ENERGY_COST, 10);
+                const in_energy = parseInt(userMessage, 10);
 
                 if (energy < in_energy) {
                     PropertiesService.getScriptProperties().setProperty("FORCEOFF_ENERGY", "0");
@@ -88,6 +88,20 @@ function doPost(e) {    //引数eはdoPost関数に自動で渡されるHTTPリ�
                 } else {
                     replyMessage = `今月の目標電気代を ${userMessage} 円に設定しました。まだ電気の操作は行えません。`;
                 }
+
+            } else {
+                // 操作可能なとき
+                const energy = parseInt(GENZAI_DENKIDAI, 10);
+                const in_energy = parseInt(userMessage, 10);
+
+                if (energy < in_energy) {
+                    PropertiesService.getScriptProperties().setProperty("FORCEOFF_ENERGY", "0");
+                    replyMessage = `今月の目標電気代を ${userMessage} 円に設定しました。`;
+                } else {
+                    PropertiesService.getScriptProperties().setProperty("FORCEOFF_ENERGY", "1");
+                    replyMessage = `今月の目標電気代を ${userMessage} 円に設定しました。電気の操作が停止しました。`;
+                }
+
             }
 
             break;
@@ -96,17 +110,32 @@ function doPost(e) {    //引数eはdoPost関数に自動で渡されるHTTPリ�
             PropertiesService.getScriptProperties().setProperty("INPUT_EXPENSE", userMessage);
             replyMessage = `今月の目標支出額を ${userMessage} 円に設定しました。`;
 
-            // ここで設定し直した支出額と今までの支出額を比較し直す(操作がストップしている場合)
-            if (FORCEOFF_EXPENSE === "1") {
 
+            // ここで設定し直した支出額と今までの支出額を比較し直す
+            if (FORCEOFF_EXPENSE === "1") {
+                // 操作がストップしている場合
                 const expense = parseInt(EXPENSE, 10);
-                const in_expense = parseInt(INPUT_EXPENSE, 10);
+                const in_expense = parseInt(userMessage, 10);
 
                 if (expense < in_expense) {
                     PropertiesService.getScriptProperties().setProperty("FORCEOFF_EXPENSE", "0");
                     replyMessage = `今月の目標支出額を ${userMessage} 円に設定しました。電気の操作が復活しました。`;
                 } else {
+                    PropertiesService.getScriptProperties().setProperty("FORCEOFF_EXPENSE", "1");
                     replyMessage = `今月の目標支出額を ${userMessage} 円に設定しました。まだ電気の操作は行えません。`;
+                }
+
+            } else {
+                // 操作可能なとき
+                const expense = parseInt(EXPENSE, 10);
+                const in_expense = parseInt(userMessage, 10);
+
+                if (expense < in_expense) {
+                    PropertiesService.getScriptProperties().setProperty("FORCEOFF_EXPENSE", "0");
+                    replyMessage = `今月の目標支出額を ${userMessage} 円に設定しました。`;
+                } else {
+                    PropertiesService.getScriptProperties().setProperty("FORCEOFF_EXPENSE", "1");
+                    replyMessage = `今月の目標支出額を ${userMessage} 円に設定しました。電気の操作が停止しました。`;
                 }
             }
 
