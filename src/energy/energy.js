@@ -38,11 +38,11 @@ function calc_energy() {
     const row = getLastData("sensor");  //テストの時はコメントアウト
     const start = sheet.getRange(row - 1, 1).getValue(); //開始時の日時を取得
     const end = sheet.getRange(row, 1).getValue();//現在の日時を取得
-    const startyear  = sheet.getRange(row-1, 3).getValue();//現在の日時を取得
-    const startmonth  = sheet.getRange(row-1, 4).getValue();//現在の日時を取得
-    const startday  = sheet.getRange(row-1, 5).getValue();//現在の日時を取得
-    const endyear  = sheet.getRange(row, 3).getValue();//現在の日時を取得
-    const endmonth  = sheet.getRange(row, 4).getValue();//現在の日時を取得
+    const startyear = sheet.getRange(row - 1, 3).getValue();//現在の日時を取得
+    const startmonth = sheet.getRange(row - 1, 4).getValue();//現在の日時を取得
+    const startday = sheet.getRange(row - 1, 5).getValue();//現在の日時を取得
+    const endyear = sheet.getRange(row, 3).getValue();//現在の日時を取得
+    const endmonth = sheet.getRange(row, 4).getValue();//現在の日時を取得
     const endday = sheet.getRange(row, 5).getValue();//現在の日時を取得
     // console.log("開始時間: " + start + "あ");
     // console.log("終了時間: " + end + "あ");
@@ -62,7 +62,7 @@ function calc_energy() {
     //加算する電気代を求める.
     denkidai = jikann * 30 * 30; //使用時間×消費電力（30Wと仮定）×電気単価（30円/Wと仮定）
 
-    
+
 
     //今までの電気代に加算する.
     result_denkidai = denkidai + parseInt(GENZAI_DENKIDAI, 10); //前回の電気代を加算
@@ -75,8 +75,10 @@ function calc_energy() {
 
 
     if (result_denkidai > input_energy_cost) {
+        PropertiesService.getScriptProperties().setProperty("FORCEOFF_ENERGY", "1");
         return 1;
     } else {
+        PropertiesService.getScriptProperties().setProperty("FORCEOFF_ENERGY", "0");
         return 0; //超えていないので0を返す
     }
 }

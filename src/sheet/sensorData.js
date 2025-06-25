@@ -5,7 +5,7 @@ function setSensorData(state) {
     const now = new Date();
 
     const hour = now.getHours();
-    
+
     const minute = now.getMinutes();
 
     const timeStr = String(hour * 60 + minute);
@@ -16,5 +16,22 @@ function setSensorData(state) {
     const day = now.getDate();           // 日
 
     // ↑追加、修正ポイント　　　　　　　　　　　　　　　　　　↓ここも
-    getSheet('sensor').getRange(row, 1, 1, 5).setValues([[timeStr, state ,year, month, day]]);//
+    getSheet('sensor').getRange(row, 1, 1, 5).setValues([[timeStr, state, year, month, day]]);//
+}
+
+//Zaimからのデータをシートに書き込む関数
+function setZaimData(data) {
+    let row = getLastData("zaim") + 1;
+
+    /*
+    日付」「金額」「カテゴリ」を抽出して書き込む
+    forEachで、dataの各itemに対して=>以降の処理をする
+    getRange(row, 1, 1, 4)は「row行目から1列目から1行分、4列目まで」という意味
+    */
+    data.forEach(item => {
+        getSheet('zaim').getRange(row, 1, 1, 2).setValues([
+            [item.date, item.amount]
+        ]);
+        row++;
+    });
 }

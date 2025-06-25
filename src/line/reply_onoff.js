@@ -12,8 +12,26 @@ function doPost(e) {    //引数eはdoPost関数に自動で渡されるHTTPリ�
         case userMessage === "on":
 
             //既に点灯しているとき
-            if (LightState() === "on") {
+            /* if (LightState() === "on") {
                 replyMessage = "既に点灯しています。";
+                break;
+            } */
+
+            // 目標電気代を超えているとき
+            if ((FORCEOFF_ENERGY === "1") && (FORCEOFF_EXPENSE !== "1")) {
+                replyMessage = "今月はすでに目標電気代を超えているので照明をつけることができません。どうしてもつけたい場合は目標電気代を変更してください。"
+                break;
+            }
+
+            // 目標支出額を超えているとき
+            if ((FORCEOFF_ENERGY !== "1") && (FORCEOFF_EXPENSE === "1")) {
+                replyMessage = "今月はすでに目標支出額を超えているので照明をつけることができません。どうしてもつけたい場合は目標支出額を変更してください。"
+                break;
+            }
+
+            // どちらも超えているとき
+            if ((FORCEOFF_ENERGY === "1") && (FORCEOFF_EXPENSE === "1")) {
+                replyMessage = "目標電気代、支出額をどちらも超えています。どうしてもつけたい場合は目標金額を変更してください。"
                 break;
             }
 
@@ -25,10 +43,10 @@ function doPost(e) {    //引数eはdoPost関数に自動で渡されるHTTPリ�
         case userMessage === "off":
 
             //既に点灯しているとき
-            if (LightState() === "off") {
+            /* if (LightState() === "off") {
                 replyMessage = "既に消灯しています。";
                 break;
-            }
+            } */
 
             setSensorData("オフ");  //シートに書き込み
             LightOff();            //ライトを消す
@@ -45,23 +63,82 @@ function doPost(e) {    //引数eはdoPost関数に自動で渡されるHTTPリ�
             break;
 
         case userMessage === "電気代設定":
-            replyMessage = `今月の目標電気代は ${INPUT_ENERGY_COST} 円です。変更する場合、半角数字で入力してください。`;
+            replyMessage = `今月の目標電気代は ${INPUT_ENERGY_COST} 円、これまでの電気代は${GENZAI_DENKIDAI}です。変更する場合、半角数字で入力してください。`;
             PropertiesService.getScriptProperties().setProperty("WHICHSTATE", "0"); //WHICHSTATEを0に設定
             break;
 
         case userMessage === "支出額設定":
-            replyMessage = `今月の目標支出額は ${INPUT_EXPENSE} 円です。変更する場合、半角数字で入力してください。`;
+            replyMessage = `今月の目標支出額は ${INPUT_EXPENSE} 円、これまでの支出額は${EXPENSE}です。変更する場合、半角数字で入力してください。`;
             PropertiesService.getScriptProperties().setProperty("WHICHSTATE", "1"); //WHICHSTATEを1に設定
             break;
 
         case (/^\d+$/.test(userMessage)) && (WHICHSTATE === "0"):  //半角数字かつ電気代設定
             PropertiesService.getScriptProperties().setProperty("INPUT_ENERGY_COST", userMessage);
             replyMessage = `今月の目標電気代を ${userMessage} 円に設定しました。`;
+
+            // ここで設定し直した電気代と今までの電気代を比較し直す
+            if (FORCEOFF_ENERGY === "1") {
+                // 操作がストップしている場合
+                const energy = parseInt(GENZAI_DENKIDAI, 10);
+                const in_energy = parseInt(userMessage, 10);
+
+                if (energy < in_energy) {
+                    PropertiesService.getScriptProperties().setProperty("FORCEOFF_ENERGY", "0");
+                    replyMessage = `今月の目標電気代を ${userMessage} 円に設定しました。電気の操作が復活しました。`;
+                } else {
+                    replyMessage = `今月の目標電気代を ${userMessage} 円に設定しました。まだ電気の操作は行えません。`;
+                }
+
+            } else {
+                // 操作可能なとき
+                const energy = parseInt(GENZAI_DENKIDAI, 10);
+                const in_energy = parseInt(userMessage, 10);
+
+                if (energy < in_energy) {
+                    PropertiesService.getScriptProperties().setProperty("FORCEOFF_ENERGY", "0");
+                    replyMessage = `今月の目標電気代を ${userMessage} 円に設定しました。`;
+                } else {
+                    PropertiesService.getScriptProperties().setProperty("FORCEOFF_ENERGY", "1");
+                    replyMessage = `今月の目標電気代を ${userMessage} 円に設定しました。電気の操作が停止しました。`;
+                }
+
+            }
+
             break;
 
         case (/^\d+$/.test(userMessage)) && (WHICHSTATE === "1"):  //半角数字かつ支出額設定
             PropertiesService.getScriptProperties().setProperty("INPUT_EXPENSE", userMessage);
             replyMessage = `今月の目標支出額を ${userMessage} 円に設定しました。`;
+
+
+            // ここで設定し直した支出額と今までの支出額を比較し直す
+            if (FORCEOFF_EXPENSE === "1") {
+                // 操作がストップしている場合
+                const expense = parseInt(EXPENSE, 10);
+                const in_expense = parseInt(userMessage, 10);
+
+                if (expense < in_expense) {
+                    PropertiesService.getScriptProperties().setProperty("FORCEOFF_EXPENSE", "0");
+                    replyMessage = `今月の目標支出額を ${userMessage} 円に設定しました。電気の操作が復活しました。`;
+                } else {
+                    PropertiesService.getScriptProperties().setProperty("FORCEOFF_EXPENSE", "1");
+                    replyMessage = `今月の目標支出額を ${userMessage} 円に設定しました。まだ電気の操作は行えません。`;
+                }
+
+            } else {
+                // 操作可能なとき
+                const expense = parseInt(EXPENSE, 10);
+                const in_expense = parseInt(userMessage, 10);
+
+                if (expense < in_expense) {
+                    PropertiesService.getScriptProperties().setProperty("FORCEOFF_EXPENSE", "0");
+                    replyMessage = `今月の目標支出額を ${userMessage} 円に設定しました。`;
+                } else {
+                    PropertiesService.getScriptProperties().setProperty("FORCEOFF_EXPENSE", "1");
+                    replyMessage = `今月の目標支出額を ${userMessage} 円に設定しました。電気の操作が停止しました。`;
+                }
+            }
+
             break;
 
         default:
