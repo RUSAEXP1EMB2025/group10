@@ -9,6 +9,7 @@ function LightOn() {
         }
     };
 
+    // 状態をオンにしておく
     PropertiesService.getScriptProperties().setProperty("LIGHT_STATE", "1");
 
     UrlFetchApp.fetch(url, options);
@@ -25,6 +26,7 @@ function LightOff() {
         }
     };
 
+    // 状態をオフにしておく
     PropertiesService.getScriptProperties().setProperty("LIGHT_STATE", "0");
 
     UrlFetchApp.fetch(url, options);

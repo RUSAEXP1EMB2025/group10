@@ -44,7 +44,7 @@ function doPost(e) {    //引数eはdoPost関数に自動で渡されるHTTPリ�
 
             //既に消灯しているとき
             if(LIGHT_STATE === "0") {
-                replyMessage = "既に消灯しています"
+                replyMessage = "既に消灯しています。"
                 break;
             }
             
