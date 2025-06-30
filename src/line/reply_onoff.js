@@ -12,10 +12,10 @@ function doPost(e) {    //引数eはdoPost関数に自動で渡されるHTTPリ�
         case userMessage === "on":
 
             //既に点灯しているとき
-            /* if (LightState() === "on") {
-                replyMessage = "既に点灯しています。";
+            if(LIGHT_STATE === "1") {
+                replyMessage = "既に点灯しています。"
                 break;
-            } */
+            }
 
             // 目標電気代を超えているとき
             if ((FORCEOFF_ENERGY === "1") && (FORCEOFF_EXPENSE !== "1")) {
@@ -42,11 +42,12 @@ function doPost(e) {    //引数eはdoPost関数に自動で渡されるHTTPリ�
 
         case userMessage === "off":
 
-            //既に点灯しているとき
-            /* if (LightState() === "off") {
-                replyMessage = "既に消灯しています。";
+            //既に消灯しているとき
+            if(LIGHT_STATE === "0") {
+                replyMessage = "既に消灯しています。"
                 break;
-            } */
+            }
+            
 
             setSensorData("オフ");  //シートに書き込み
             LightOff();            //ライトを消す

@@ -24,6 +24,9 @@ const LIGHT_ON_ID = PropertiesService.getScriptProperties().getProperty("LIGHT_O
 // ライトOFF用の赤外線信号ID
 const LIGHT_OFF_ID = PropertiesService.getScriptProperties().getProperty("LIGHT_OFF_ID");
 
+// ライトの状態 (0でオフ、1でオン)
+const LIGHT_STATE = PropertiesService.getScriptProperties().getProperty("LIGHT_STATE") || "0";
+
 // 今月の目標電気代.設定されていなかったら「0」という文字列が入る.
 const INPUT_ENERGY_COST = PropertiesService.getScriptProperties().getProperty("INPUT_ENERGY_COST") || "0";
 
