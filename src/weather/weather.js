@@ -1,7 +1,5 @@
-// 取得する場所の緯度と経度（大阪府茨木市）
-const LATITUDE_OSAKA = '34.8235';
-const LONGITUDE_OSAKA = '135.5710';
-
+// 日の出時刻を取得し、その時刻でhandleSunriseActions()のトリガーを組む
+// sunRise.jsのtriggers関数によって毎日0〜1時に一回実行される
 function getTime() {
   try {
     const properties = PropertiesService.getScriptProperties();
@@ -18,10 +16,10 @@ function getTime() {
 
     const sunriseTimestamp = json.sys.sunrise; // 日の出のUnixタイムスタンプ(UTC)
     const sunriseDate = new Date(sunriseTimestamp * 1000);
-    
+
     // 'HH:mm'形式で日本のタイムゾーンの時刻をフォーマット
     const sunriseTime = Utilities.formatDate(sunriseDate, 'Asia/Tokyo', 'HH:mm');
-    properties.setProperty('SUNRISE_TIME', sunriseTime);
+    PropertiesService.getScriptProperties().setProperty("SUNRISE_TIME", sunriseTime);
     console.log(`日の出時刻を '${sunriseTime}' として保存しました。`);
 
     // 既存の消灯チェックトリガーがあれば削除（重複実行を防ぐため）
@@ -38,7 +36,7 @@ function getTime() {
       .timeBased()
       .at(sunriseDate) // 取得した日の出時刻に実行
       .create();
-      
+
     console.log(`消灯チェックのトリガーを ${Utilities.formatDate(sunriseDate, 'Asia/Tokyo', 'yyyy-MM-dd HH:mm:ss')} に設定しました。`);
 
   } catch (e) {
@@ -46,6 +44,7 @@ function getTime() {
   }
 }
 
+// 天気を出力する関数
 function getWeather() {
   try {
     const properties = PropertiesService.getScriptProperties();
