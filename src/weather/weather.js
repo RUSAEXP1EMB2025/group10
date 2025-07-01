@@ -27,14 +27,14 @@ function getTime() {
     // 既存の消灯チェックトリガーがあれば削除（重複実行を防ぐため）
     const triggers = ScriptApp.getProjectTriggers();
     for (const trigger of triggers) {
-      if (trigger.getHandlerFunction() === 'checkAndTurnOffLight') {
+      if (trigger.getHandlerFunction() === 'handleSunriseActions') {
         ScriptApp.deleteTrigger(trigger);
         console.log('古い消灯チェックトリガーを削除しました。');
       }
     }
 
     // 新しい日の出時刻で消灯チェックのトリガーを作成
-    ScriptApp.newTrigger('checkAndTurnOffLight')
+    ScriptApp.newTrigger('handleSunriseActions')
       .timeBased()
       .at(sunriseDate) // 取得した日の出時刻に実行
       .create();
@@ -56,7 +56,7 @@ function getWeather() {
       return null;
     }
 
-    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${LATITUDE_OSAKA}&lon=${LONGITUDE_OSAKA}&appid=${weatherApiKey}&units=metric&lang=ja`;
+    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${LATITUDE_OSAKA}&lon=${LONGITUDE_OSAKA}&appid=${weatherApiKey}&units=metric&lang=en`;
     const response = UrlFetchApp.fetch(url);
     const json = JSON.parse(response.getContentText());
 
