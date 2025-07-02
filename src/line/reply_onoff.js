@@ -1,4 +1,4 @@
-function doPost(e) {    //引数eはdoPost関数に自動で渡されるHTTPリクエスト情報が入ったオブジェクト
+/* function doPost(e) {    //引数eはdoPost関数に自動で渡されるHTTPリクエスト情報が入ったオブジェクト
 
     writeLog(e.postData.contents);
 
@@ -171,4 +171,4 @@ function doPost(e) {    //引数eはdoPost関数に自動で渡されるHTTPリ�
             }
         }
     }
-}
+} */

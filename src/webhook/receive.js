@@ -1,7 +1,4 @@
 function doPost(e) {    //引数eはdoPost関数に自動で渡されるHTTPリクエスト情報が入ったオブジェクト
-
-    writeLog(e.postData.contents);
-
     const data = JSON.parse(e.postData.contents);   //e.postData.contentsに送られてきた内容が格納されている.JSON形式なのでオブジェクトに変換
     if (Array.isArray(data.events)) {
         const replyToken = data.events[0].replyToken;   //返信に必要なトークンを取り出す
@@ -68,12 +65,13 @@ function doPost(e) {    //引数eはdoPost関数に自動で渡されるHTTPリ�
                 break;
 
             case userMessage === "詳細設定":
-                replyMessage = "A.電気代設定をする\nB.支出額設定をする\nC.自宅の緯度経度を再設定する\nD.操作するNature Remoを変更する";
+                replyMessage = "A.電気代設定をする\nB.支出額設定をする\nC.自宅の緯度経度を再設定する\nD.操作するNature Remoを変更する\nE.やっぱりやめる";
                 PropertiesService.getScriptProperties().setProperty("SETTING", "1");
                 break;
 
             case SETTING === "1":
                 replyMessage = setting(userMessage);
+                break;
 
             default:
                 replyMessage = "無効なテキストです";

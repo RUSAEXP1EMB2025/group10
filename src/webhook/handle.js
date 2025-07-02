@@ -95,7 +95,7 @@ function setting(userMessage) {
 
         // 自宅の緯度経度の第一段階    
         case userMessage === "C":
-            replyMessage = "あなたの自宅の緯度を入力してください";
+            replyMessage = "あなたの自宅の住所を入力してください";
             PropertiesService.getScriptProperties().setProperty("ISLOCATION", "1"); //ISLOCATIONを1に設定
             break;
 
@@ -107,6 +107,7 @@ function setting(userMessage) {
 
             // 詳細設定の終了
             PropertiesService.getScriptProperties().setProperty("SETTING", "0");
+            break;
         
         case userMessage === "D":
             replyMessage = "Nature Remoのアクセストークンを入力してください";
@@ -115,13 +116,22 @@ function setting(userMessage) {
 
         case ISTOKEN === "1":
             PropertiesService.getScriptProperties().setProperty("REMO_ACCESS_TOKEN", userMessage); //REMO_ACCESS_TOKENを1に設定
-            PropertiesService.getScriptProperties().setProperty("ISTOKEN", "1"); //ISTOKENを0に戻す
+            PropertiesService.getScriptProperties().setProperty("ISTOKEN", "0"); //ISTOKENを0に戻す
 
             // 詳細設定の終了
             PropertiesService.getScriptProperties().setProperty("SETTING", "0");
 
             break;
 
+        case userMessage === "E":
+
+            replyMessage = "詳細設定を終了しました。";
+
+            // 詳細設定の終了
+            PropertiesService.getScriptProperties().setProperty("SETTING", "0");
+
+            break;
+            
         default:
             replyMessage = "無効なテキストです";
     }
