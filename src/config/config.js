@@ -66,6 +66,15 @@ const LONGITUDE = PropertiesService.getScriptProperties().getProperty("LONGITUDE
 // 日の出時刻（デフォルトで朝の4時）
 const SUNRISE_TIME = PropertiesService.getScriptProperties().getProperty("SUNRISE_TIME") || "04:00";
 
+// 詳細設定のフラグ（1の時に詳細設定）
+const SETTING = PropertiesService.getScriptProperties().getProperty("SETTING") || "0";
+
+// 自宅の住所入力のフラグ
+const ISLOCATION = PropertiesService.getScriptProperties().getProperty("ISLOCATION") || "0";
+
+// REMOのトークン設定のフラグ
+const ISTOKEN = PropertiesService.getScriptProperties().getProperty("ISTOKEN") || "0";
+
 // LINE Bot：全ユーザーにメッセージをブロードキャストするエンドポイント
 const LINE_BROADCAST_ENDPOINT = 'https://api.line.me/v2/bot/message/broadcast';
 
