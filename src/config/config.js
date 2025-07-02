@@ -57,6 +57,10 @@ const FORCEOFF_ENERGY = PropertiesService.getScriptProperties().getProperty("FOR
 // 目標支出額を超えたらこれを1にする.1の時はオン出来ないようにする.
 const FORCEOFF_EXPENSE = PropertiesService.getScriptProperties().getProperty("FORCEOFF_EXPENSE") || "0";
 
+// Google Maps Geocoding API
+const D_APIKEY = PropertiesService.getScriptProperties().getProperty("D_APIKEY");
+
+
 // LINE Bot：全ユーザーにメッセージをブロードキャストするエンドポイント
 const LINE_BROADCAST_ENDPOINT = 'https://api.line.me/v2/bot/message/broadcast';
 
