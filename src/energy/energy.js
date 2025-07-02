@@ -29,7 +29,6 @@ function calc_energy() {
     let denkidai = 0;    //今回加算する電気代
     let result_denkidai = 0; //求めた今までの合計電気代
 
-
     /*
     calc_energy()はオフされたら呼び出されるのでシートの最終行は常にオフです.
     従って、getLastDataでその時点での最終行(row)を取得しているのでstartは一つ上の行(row-1)で、endは最終行(row)になります.
@@ -56,11 +55,13 @@ function calc_energy() {
     // if(endyear !== startyear ) {
     //     endyear - startyear; //年が違う場合は年の差を求める
     // }
-
-    jikann = Math.abs(jikann) / 60;
-
+    if (startyear !== endyear || startmonth !== endmonth || startday !== endday) { // 年や月、日が違う場合を考慮
+        jikann += (endyear - startyear) * 365 * 24 * 60; // 年の差を考慮
+        jikann += (endmonth - startmonth) * 30 * 24 * 60; // 月の差を考慮 　一ヵ月は30日と仮定
+        jikann += (endday - startday) * 24 * 60; // 日の差を考慮
+    }
     //加算する電気代を求める.
-    denkidai = jikann * 30 * 30; //使用時間×消費電力（30Wと仮定）×電気単価（30円/Wと仮定）
+    denkidai = jikann * 0.007 * 31; //使用時間×消費電力（0.007W/hと仮定）×電気単価（31円/kWと仮定）
 
 
 
