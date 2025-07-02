@@ -57,6 +57,15 @@ const FORCEOFF_ENERGY = PropertiesService.getScriptProperties().getProperty("FOR
 // 目標支出額を超えたらこれを1にする.1の時はオン出来ないようにする.
 const FORCEOFF_EXPENSE = PropertiesService.getScriptProperties().getProperty("FORCEOFF_EXPENSE") || "0";
 
+// 自宅の緯度（デフォルトで大阪府茨木市）
+const REMO_IDO = PropertiesService.getScriptProperties().getProperty("REMO_IDO") || "34.80902"; 
+
+// 自宅の経度（デフォルトで大阪府茨木市）
+const REMO_KEIDO = PropertiesService.getScriptProperties().getProperty("REMO_KEIDO") || "135.55755";
+
+// 詳細設定のフラグ（1の時に詳細設定）
+const SETTING = PropertiesService.getScriptProperties().getProperty("SETTING") || "0";
+
 // LINE Bot：全ユーザーにメッセージをブロードキャストするエンドポイント
 const LINE_BROADCAST_ENDPOINT = 'https://api.line.me/v2/bot/message/broadcast';
 
