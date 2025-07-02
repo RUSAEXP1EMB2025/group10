@@ -57,11 +57,9 @@ const FORCEOFF_ENERGY = PropertiesService.getScriptProperties().getProperty("FOR
 // 目標支出額を超えたらこれを1にする.1の時はオン出来ないようにする.
 const FORCEOFF_EXPENSE = PropertiesService.getScriptProperties().getProperty("FORCEOFF_EXPENSE") || "0";
 
-<<<<<<< HEAD
 // Google Maps Geocoding API
 const D_APIKEY = PropertiesService.getScriptProperties().getProperty("D_APIKEY");
 
-=======
 // どこの日の出時刻を取得するか（緯度）（デフォルトで大阪府茨木市）
 const LATITUDE = PropertiesService.getScriptProperties().getProperty("LATITUDE") || "34.8235";
 
@@ -79,7 +77,6 @@ const ISLOCATION = PropertiesService.getScriptProperties().getProperty("ISLOCATI
 
 // REMOのトークン設定のフラグ
 const ISTOKEN = PropertiesService.getScriptProperties().getProperty("ISTOKEN") || "0";
->>>>>>> main
 
 // LINE Bot：全ユーザーにメッセージをブロードキャストするエンドポイント
 const LINE_BROADCAST_ENDPOINT = 'https://api.line.me/v2/bot/message/broadcast';
