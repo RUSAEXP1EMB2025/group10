@@ -58,10 +58,10 @@ const FORCEOFF_ENERGY = PropertiesService.getScriptProperties().getProperty("FOR
 const FORCEOFF_EXPENSE = PropertiesService.getScriptProperties().getProperty("FORCEOFF_EXPENSE") || "0";
 
 // どこの日の出時刻を取得するか（緯度）（デフォルトで大阪府茨木市）
-const LATITUDE_OSAKA = PropertiesService.getScriptProperties().getProperty("LATITUDE_OSAKA") || "34.8235";
+const LATITUDE = PropertiesService.getScriptProperties().getProperty("LATITUDE") || "34.8235";
 
 // どこの日の出時刻を取得するか（経度）（デフォルトで大阪府茨木市）
-const LONGITUDE_OSAKA = PropertiesService.getScriptProperties().getProperty("LONGITUDE_OSAKA") || "135.5710";
+const LONGITUDE = PropertiesService.getScriptProperties().getProperty("LONGITUDE") || "135.5710";
 
 // 日の出時刻（デフォルトで朝の4時）
 const SUNRISE_TIME = PropertiesService.getScriptProperties().getProperty("SUNRISE_TIME") || "04:00";

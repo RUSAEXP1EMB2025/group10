@@ -2,15 +2,8 @@
 // sunRise.jsのtriggers関数によって毎日0〜1時に一回実行される
 function getTime() {
   try {
-    const properties = PropertiesService.getScriptProperties();
-    const weatherApiKey = properties.getProperty('WEATHER_API_KEY');
 
-    if (!weatherApiKey) {
-      console.error('APIキーが設定されていません。スクリプトプロパティに「WEATHER_API_KEY」を設定してください。');
-      return;
-    }
-
-    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${LATITUDE_OSAKA}&lon=${LONGITUDE_OSAKA}&appid=${weatherApiKey}&units=metric&lang=ja`;
+    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${LATITUDE}&lon=${LONGITUDE}&appid=${WEATHER_API_KEY}&units=metric&lang=ja`;
     const response = UrlFetchApp.fetch(url);
     const json = JSON.parse(response.getContentText());
 
@@ -47,15 +40,7 @@ function getTime() {
 // 天気を出力する関数
 function getWeather() {
   try {
-    const properties = PropertiesService.getScriptProperties();
-    const weatherApiKey = properties.getProperty('WEATHER_API_KEY');
-
-    if (!weatherApiKey) {
-      console.error('APIキーが設定されていません。');
-      return null;
-    }
-
-    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${LATITUDE_OSAKA}&lon=${LONGITUDE_OSAKA}&appid=${weatherApiKey}&units=metric&lang=en`;
+    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${LATITUDE}&lon=${LONGITUDE}&appid=${WEATHER_API_KEY}&units=metric&lang=en`;
     const response = UrlFetchApp.fetch(url);
     const json = JSON.parse(response.getContentText());
 
