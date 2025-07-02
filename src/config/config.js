@@ -57,6 +57,15 @@ const FORCEOFF_ENERGY = PropertiesService.getScriptProperties().getProperty("FOR
 // 目標支出額を超えたらこれを1にする.1の時はオン出来ないようにする.
 const FORCEOFF_EXPENSE = PropertiesService.getScriptProperties().getProperty("FORCEOFF_EXPENSE") || "0";
 
+// どこの日の出時刻を取得するか（緯度）（デフォルトで大阪府茨木市）
+const LATITUDE = PropertiesService.getScriptProperties().getProperty("LATITUDE") || "34.8235";
+
+// どこの日の出時刻を取得するか（経度）（デフォルトで大阪府茨木市）
+const LONGITUDE = PropertiesService.getScriptProperties().getProperty("LONGITUDE") || "135.5710";
+
+// 日の出時刻（デフォルトで朝の4時）
+const SUNRISE_TIME = PropertiesService.getScriptProperties().getProperty("SUNRISE_TIME") || "04:00";
+
 // LINE Bot：全ユーザーにメッセージをブロードキャストするエンドポイント
 const LINE_BROADCAST_ENDPOINT = 'https://api.line.me/v2/bot/message/broadcast';
 
