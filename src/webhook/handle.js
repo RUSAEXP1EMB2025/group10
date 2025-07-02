@@ -101,7 +101,9 @@ function setting(userMessage) {
 
         case ISLOCATION === "1":
 
-            // convertAddress(userMessage);
+            convertAddress(userMessage);
+
+            replyMessage = "わぁ……君のいる場所、今おじさんの心のGPSにもしっかり届いちゃったよぉ😳💓 こんなに近くに感じるなんて……運命かなぁ？💘✨";
             
             PropertiesService.getScriptProperties().setProperty("ISLOCATION", "0"); //ISLOCATIONを0に戻す
 

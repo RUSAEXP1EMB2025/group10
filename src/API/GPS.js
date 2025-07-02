@@ -1,9 +1,9 @@
-function convertAdress(address) {
+function convertAddress(address) {
 
-  const encodedAddress = encodeURIComponent(address); // 住所をURLに使えるように変換
+
+  const encodedAddress = encodeURIComponent(address);
   const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodedAddress}&key=${D_APIKEY}`;
 
-  // リクエスト送信
   const response = UrlFetchApp.fetch(url);
   const json = JSON.parse(response.getContentText());
 
@@ -12,10 +12,11 @@ function convertAdress(address) {
     const lat = location.lat;
     const lng = location.lng;
 
-    // 緯度・経度をスクリプトプロパティに保存
     const props = PropertiesService.getScriptProperties();
-    props.setProperty("home_lat", lat.toString());
-    props.setProperty("home_lng", lng.toString());
+    props.setProperty("LATITUDE", lat.toString());
+    props.setProperty("LONGITUDE", lng.toString());
 
+    
+  } 
 }
-}
+
