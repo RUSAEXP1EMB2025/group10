@@ -103,7 +103,7 @@ function setting(userMessage) {
 
             convertAddress(userMessage);
 
-            replyMessage = "わぁ……君のいる場所、今おじさんの心のGPSにもしっかり届いちゃったよぉ😳💓 こんなに近くに感じるなんて……運命かなぁ？💘✨";
+            replyMessage = "自宅の緯度・経度を再設定しました";
             
             PropertiesService.getScriptProperties().setProperty("ISLOCATION", "0"); //ISLOCATIONを0に戻す
 
