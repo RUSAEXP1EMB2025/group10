@@ -29,7 +29,12 @@ function setting(userMessage) {
 
                 if (energy < in_energy) {
                     PropertiesService.getScriptProperties().setProperty("FORCEOFF_ENERGY", "0");
-                    replyMessage = `今月の目標電気代を ${userMessage} 円に設定しました。電気の操作が復活しました。`;
+                    replyMessage = `今月の目標電気代を ${userMessage} 円に設定しました。まだ電気の操作は行えません。目標支出額を上回っています。`;
+
+                    if (FORCEOFF_EXPENSE === "0") {
+                        replyMessage = `今月の目標電気代を ${userMessage} 円に設定しました。点灯操作が復活しました。`;
+                    }
+
                 } else {
                     replyMessage = `今月の目標電気代を ${userMessage} 円に設定しました。まだ電気の操作は行えません。`;
                 }
@@ -68,7 +73,12 @@ function setting(userMessage) {
 
                 if (expense < in_expense) {
                     PropertiesService.getScriptProperties().setProperty("FORCEOFF_EXPENSE", "0");
-                    replyMessage = `今月の目標支出額を ${userMessage} 円に設定しました。電気の操作が復活しました。`;
+                    replyMessage = `今月の目標支出額を ${userMessage} 円に設定しました。まだ電気の操作は行えません。目標電気代を上回っています。`;
+
+                    if (FORCEOFF_ENERGY === "0") {
+                        replyMessage = `今月の目標支出額を ${userMessage} 円に設定しました。点灯操作が復活しました。`;
+                    }
+
                 } else {
                     PropertiesService.getScriptProperties().setProperty("FORCEOFF_EXPENSE", "1");
                     replyMessage = `今月の目標支出額を ${userMessage} 円に設定しました。まだ電気の操作は行えません。`;
@@ -104,24 +114,47 @@ function setting(userMessage) {
             convertAddress(userMessage);
 
             replyMessage = "自宅の緯度・経度を再設定しました";
-            
+
             PropertiesService.getScriptProperties().setProperty("ISLOCATION", "0"); //ISLOCATIONを0に戻す
 
             // 詳細設定の終了
             PropertiesService.getScriptProperties().setProperty("SETTING", "0");
             break;
-        
+
         case userMessage === "D":
             replyMessage = "Nature Remoのアクセストークンを入力してください";
             PropertiesService.getScriptProperties().setProperty("ISTOKEN", "1"); //ISTOKENを1に設定
             break;
 
         case ISTOKEN === "1":
-            PropertiesService.getScriptProperties().setProperty("REMO_ACCESS_TOKEN", userMessage); //REMO_ACCESS_TOKENを1に設定
+            PropertiesService.getScriptProperties().setProperty("REMO_ACCESS_TOKEN", userMessage); //REMO_ACCESS_TOKENを設定
             PropertiesService.getScriptProperties().setProperty("ISTOKEN", "0"); //ISTOKENを0に戻す
+
+            PropertiesService.getScriptProperties().setProperty("IS_ONID", "1"); //IS_ONIDを1に設定
+
+
+            replyMessage = "点灯のシグナルIDを入力してください";
+
+            break;
+
+        case IS_ONID === "1":
+            PropertiesService.getScriptProperties().setProperty("LIGHT_ON_ID", userMessage); //LIGHT_ON_IDを設定
+            PropertiesService.getScriptProperties().setProperty("IS_ONID", "0"); //IS_ONIDを戻す
+
+            PropertiesService.getScriptProperties().setProperty("IS_OFFID", "1"); //IS_OFFIDを1に設定
+
+            replyMessage = "消灯のシグナルIDを入力してください";
+
+            break;
+
+        case IS_OFFID === "1":
+            PropertiesService.getScriptProperties().setProperty("LIGHT_OFF_ID", userMessage); //LIGHT_OFF_IDを設定
+            PropertiesService.getScriptProperties().setProperty("IS_OFFID", "0"); //IS_OFFIDを戻す
 
             // 詳細設定の終了
             PropertiesService.getScriptProperties().setProperty("SETTING", "0");
+
+            replyMessage = "詳細設定を終了しました。";
 
             break;
 
@@ -133,7 +166,7 @@ function setting(userMessage) {
             PropertiesService.getScriptProperties().setProperty("SETTING", "0");
 
             break;
-            
+
         default:
             replyMessage = "無効なテキストです";
     }

@@ -36,7 +36,7 @@ const GENZAI_DENKIDAI = PropertiesService.getScriptProperties().getProperty("GEN
 // 今月の目標支出額.設定されていなかったら「0」という文字列が入る.
 const INPUT_EXPENSE = PropertiesService.getScriptProperties().getProperty("INPUT_EXPENSE") || "0";
 
-// 一日の初めに前日の支出額をここに格納していく
+// シートからの合計額をここに格納
 const EXPENSE = PropertiesService.getScriptProperties().getProperty("EXPENSE") || "0";
 
 // ユーザが電気代設定と支出額設定のどちらを選んだか.設定されていなかったら「0」という文字列が入る.（0：電気代設定, 1：支出額設定）
@@ -77,6 +77,12 @@ const ISLOCATION = PropertiesService.getScriptProperties().getProperty("ISLOCATI
 
 // REMOのトークン設定のフラグ
 const ISTOKEN = PropertiesService.getScriptProperties().getProperty("ISTOKEN") || "0";
+
+// LIGHT_ON_ID設定のフラグ
+const IS_ONID = PropertiesService.getScriptProperties().getProperty("IS_ONID") || "0";
+
+// LIGHT_OFF_ID設定のフラグ
+const IS_OFFID = PropertiesService.getScriptProperties().getProperty("IS_OFFID") || "0";
 
 // LINE Bot：全ユーザーにメッセージをブロードキャストするエンドポイント
 const LINE_BROADCAST_ENDPOINT = 'https://api.line.me/v2/bot/message/broadcast';
