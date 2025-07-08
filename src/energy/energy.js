@@ -45,5 +45,5 @@ function calc_energy() {
 function HowMuchCost() {
     PropertiesService.getScriptProperties().setProperty("GENZAI_DENKIDAI", "0");
     PropertiesService.getScriptProperties().setProperty("FORCEOFF_ENERGY", "0");
-    SendLineMessage("今月の目標電気代を半角数字のみで入力してください。変更は出来ません。");
+    SendLineMessage("今月の目標電気代を半角数字のみで入力してください。");
 }

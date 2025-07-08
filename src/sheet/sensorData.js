@@ -36,10 +36,7 @@ function setZaimData(data) {
     });
 }
 
-// Zaimのデータを全消しする関数
-function clear_zaim() {
-    const sheet = getSheet('zaim');
+function clear_sensor() {
+    const sheet = getSheet('sensor');
     sheet.clearContents(); // シート全体を削除
-
-    PropertiesService.getScriptProperties().setProperty("EXPENSE", "0");    // 合計をリセット
 }

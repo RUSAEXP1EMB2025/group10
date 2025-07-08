@@ -77,3 +77,14 @@ function calc_expense() {
         return 0;
     }
 }
+
+// Zaimのデータをリセットする関数
+function clear_zaim() {
+    const sheet = getSheet('zaim');
+    sheet.clearContents(); // シート全体を削除
+
+    PropertiesService.getScriptProperties().setProperty("EXPENSE", "0");    // 合計をリセット
+    PropertiesService.getScriptProperties().setProperty("FORCEOFF_EXPENSE", "0");
+
+    SendLineMessage("今月の目標支出額を半角数字のみで入力してください。");
+}
