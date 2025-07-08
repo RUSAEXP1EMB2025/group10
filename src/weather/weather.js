@@ -13,14 +13,12 @@ function getTime() {
     // 'HH:mm'形式で日本のタイムゾーンの時刻をフォーマット
     const sunriseTime = Utilities.formatDate(sunriseDate, 'Asia/Tokyo', 'HH:mm');
     PropertiesService.getScriptProperties().setProperty("SUNRISE_TIME", sunriseTime);
-    console.log(`日の出時刻を '${sunriseTime}' として保存しました。`);
 
     // 既存の消灯チェックトリガーがあれば削除（重複実行を防ぐため）
     const triggers = ScriptApp.getProjectTriggers();
     for (const trigger of triggers) {
       if (trigger.getHandlerFunction() === 'handleSunriseActions') {
         ScriptApp.deleteTrigger(trigger);
-        console.log('古い消灯チェックトリガーを削除しました。');
       }
     }
 
@@ -29,8 +27,6 @@ function getTime() {
       .timeBased()
       .at(sunriseDate) // 取得した日の出時刻に実行
       .create();
-
-    console.log(`消灯チェックのトリガーを ${Utilities.formatDate(sunriseDate, 'Asia/Tokyo', 'yyyy-MM-dd HH:mm:ss')} に設定しました。`);
 
   } catch (e) {
     console.error(`日の出時刻の取得またはトリガー設定中にエラーが発生しました: ${e}`);

@@ -88,8 +88,8 @@ function doPost(e) {    //引数eはdoPost関数に自動で渡されるHTTPリ�
             const longitude = data.lon;
             const ido = parseFloat(latitude, 10);
             const keido = parseFloat(longitude, 10);
-            const idosa = (ido - parseFloat(REMO_IDO, 10)) * 111;
-            const keidosa = (keido - parseFloat(REMO_KEIDO, 10)) * 90;
+            const idosa = (ido - parseFloat(LATITUDE, 10)) * 111;
+            const keidosa = (keido - parseFloat(LONGITUDE, 10)) * 90;
             const jijyounowa = (idosa ** 2) + (keidosa ** 2);
             const kyori = Math.sqrt(jijyounowa);
             if (kyori > 1) {                                  // 1km以内ならば

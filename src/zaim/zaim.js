@@ -40,6 +40,7 @@ function zaimOneDay() {
 
         if (isOver === 1) {
             PropertiesService.getScriptProperties().setProperty("FORCEOFF_EXPENSE", "1");
+            SendLineMessage("目標支出額を超えました。点灯操作が停止しました。");
         } else {
             PropertiesService.getScriptProperties().setProperty("FORCEOFF_EXPENSE", "0");
         }

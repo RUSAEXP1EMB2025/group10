@@ -4,6 +4,22 @@ function setting(userMessage) {
 
     switch (true) {
 
+        // 詳細設定終了
+        case userMessage === "E":
+
+            replyMessage = "詳細設定を終了しました。";
+
+            PropertiesService.getScriptProperties().setProperty("ISLOCATION", "0"); //ISLOCATIONを0に戻す
+            PropertiesService.getScriptProperties().setProperty("ISTOKEN", "0"); //ISTOKENを0に戻す
+            PropertiesService.getScriptProperties().setProperty("IS_ONID", "0"); //IS_ONIDを戻す
+            PropertiesService.getScriptProperties().setProperty("IS_OFFID", "0"); //IS_OFFIDを戻す
+
+            // 詳細設定の終了
+            PropertiesService.getScriptProperties().setProperty("SETTING", "0");
+
+            break;
+
+
         // 電気代設定の第一段階
         case userMessage === "A":
             replyMessage = `今月の目標電気代は ${INPUT_ENERGY_COST} 円、これまでの電気代は${GENZAI_DENKIDAI}です。変更する場合、半角数字で入力してください。`;
@@ -155,15 +171,6 @@ function setting(userMessage) {
             PropertiesService.getScriptProperties().setProperty("SETTING", "0");
 
             replyMessage = "詳細設定を終了しました。";
-
-            break;
-
-        case userMessage === "E":
-
-            replyMessage = "詳細設定を終了しました。";
-
-            // 詳細設定の終了
-            PropertiesService.getScriptProperties().setProperty("SETTING", "0");
 
             break;
 
